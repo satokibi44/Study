@@ -1,7 +1,6 @@
 FROM php:7.4-fpm
 COPY ./src /application
 WORKDIR /application
-#ecs-hands-on/composerの/usr/local/bin/composerをecs-hands-on/laravelの/usr/local/bin/composerにコピー
 COPY --from=ecs-hands-on/composer /usr/local/bin/composer /usr/local/bin/composer
 RUN apt-get update && apt-get install -y \
 git \

@@ -1,0 +1,40 @@
+{
+    "family": "ecs-hands-on-for-command",
+    "taskRoleArn":"arn:aws:iam::719378226820:role/ECSTaskRole",
+    "executionRoleArn": "arn:aws:iam::719378226820:role/ECSTaskRole",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "laravel",
+            "image": "719378226820.dkr.ecr.us-east-2.amazonaws.com/ecs-hands-on/laravel",
+            "essential": true,
+            "environment": [
+                {
+                    "name": "APP_ENV",
+                    "value": "production"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "APP_WORD",
+                    "valueFrom": "arn:aws:ssm:us-east-2:719378226820:parameter/APP_WORD"
+                }
+            ],
+            "readonlyRootFilesystem": false,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "ecs-hands-on", 
+                    "awslogs-region": "us-east-2",
+                    "awslogs-datetime-format": "%Y-%m-%d %H:%M:%S",
+                    "awslogs-stream-prefix": "laravel"
+                }
+            }
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
+}
