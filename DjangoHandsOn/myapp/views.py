@@ -5,4 +5,5 @@ from django.http import HttpResponse
 
 
 def hello(request):
-    return HttpResponse("Hello, Nginx.")
+    msg = request.GET["msg"]
+    return HttpResponse("Hello, Nginx."+msg)
